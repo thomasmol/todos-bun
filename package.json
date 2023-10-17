@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build && bun src/lib/server/database/migrate.ts",
+    "build": "vite build",
+    "build:migrate": "vite build && bun src/lib/server/database/migrate.ts",
     "preview": "vite preview",
     "start": "bun build/index.js",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -40,7 +41,8 @@
     "@auth/drizzle-adapter": "^0.3.3",
     "@auth/sveltekit": "^0.3.9",
     "dotenv": "^16.3.1",
-    "drizzle-orm": "^0.28.6"
+    "drizzle-orm": "^0.28.6",
+    "postgres": "^3.4.0"
   },
   "overrides": {
     "@auth/core": "$@auth/core"
