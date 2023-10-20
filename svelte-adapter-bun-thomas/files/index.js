@@ -672,6 +672,7 @@ var serve = function(path2, client = false) {
   });
 };
 var ssr = function(req) {
+  console.log("ssr req: ", req);
   let request = req;
   if (build_options.dynamic_origin ?? false) {
     let url = req.url;
