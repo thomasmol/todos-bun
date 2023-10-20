@@ -678,7 +678,7 @@ var ssr = function(req) {
     let path2 = url.slice(url.split("/", 3).join("/").length);
     let base = origin || get_origin(req.headers);
     console.log("base", base);
-    request = new Request(base + path2, req);
+    request = new Request('https://todos-bun-production.up.railway.app' + path2, req);
   }
   if (address_header && !request.headers.has(address_header)) {
     throw new Error(`Address header was specified with ${ENV_PREFIX + "ADDRESS_HEADER"}=${address_header} but is absent from request`);
