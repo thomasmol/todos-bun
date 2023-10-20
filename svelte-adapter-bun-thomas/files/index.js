@@ -676,8 +676,9 @@ var ssr = function(req) {
   if (build_options.dynamic_origin ?? false) {
     let url = req.url;
     let path2 = url.slice(url.split("/", 3).join("/").length);
-    let origin = get_origin(req.headers);
-    request = new Request(origin + path2, req);
+    let base = origin || get_origin(req.headers);
+    console.log("base", base);
+    request = new Request(base + path2, req);
   }
   if (address_header && !request.headers.has(address_header)) {
     throw new Error(`Address header was specified with ${ENV_PREFIX + "ADDRESS_HEADER"}=${address_header} but is absent from request`);
@@ -717,6 +718,7 @@ installPolyfills();
 var server = new Server(manifest);
 await server.init({ env: (Bun || process).env });
 var xff_depth = parseInt(env("XFF_DEPTH", build_options.xff_depth ?? 1));
+var origin = env("ORIGIN", undefined);
 var address_header = env("ADDRESS_HEADER", "").toLowerCase();
 var protocol_header = env("PROTOCOL_HEADER", "").toLowerCase();
 var host_header = env("HOST_HEADER", "host").toLowerCase();
