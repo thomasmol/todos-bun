@@ -26,6 +26,11 @@ const authorization = (async ({ event, resolve }) => {
 }) satisfies Handle;
 
 export const handle = sequence(
+	(async ({ event, resolve }) => {
+		console.log(event)
+		
+		return resolve(event);
+	}) satisfies Handle,
 	SvelteKitAuth({
 		debug: true,
 		session: {
