@@ -659,6 +659,7 @@ function installPolyfills() {
 
 // node_modules/t
 var serve = function(path2, client = false) {
+  console.log("Serving path:", path);
   return existsSync2(path2) && sirv_default(path2, {
     etag: true,
     gzip: true,
@@ -672,7 +673,6 @@ var serve = function(path2, client = false) {
   });
 };
 var ssr = function(req) {
-  console.log("ssr req: ", req);
   let request = req;
   if (build_options.dynamic_origin ?? false) {
     let url = req.url;
