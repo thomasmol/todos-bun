@@ -676,10 +676,10 @@ var ssr = function(req) {
   let request = req;
   const forwardedProto = req.headers.get("x-forwarded-proto");
   if (forwardedProto === "https") {
-    const originalUrl = new URL(req.url);
-    const secureUrl = new URL(req.url);
+    var originalUrl = new URL(req.url);
+    var secureUrl = new URL(req.url);
     secureUrl.protocol = "https:";
-    req = new Request(secureUrl.toString(), req);
+    request = new Request(secureUrl.toString(), req);
   }
   if (build_options.dynamic_origin ?? false) {
     let url = req.url;
