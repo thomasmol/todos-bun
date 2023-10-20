@@ -782,5 +782,5 @@ var serverOptions = {
   }
 };
 websocket && (serverOptions.websocket = websocket);
-console.info(`Listening on ${hostname + ":" + port} with baseURI ${serverOptions.baseURI}` + (websocket ? " (Websocket)" : ""));
+console.info(`Listening on ${hostname + ":" + port} with baseURI ${serverOptions.baseURI} and ${origin}` + (websocket ? " (Websocket)" : ""));
 serve2(serverOptions);
