@@ -673,7 +673,7 @@ var serve = function(path2, client = false) {
 };
 var ssr = function(req) {
   console.log("Headers:", Object.fromEntries(req.headers));
-
+  let request = req;
   if (build_options.dynamic_origin ?? false) {
     let url = req.url;
     let path2 = url.slice(url.split("/", 3).join("/").length);
