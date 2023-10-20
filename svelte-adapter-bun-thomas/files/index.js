@@ -674,6 +674,13 @@ var serve = function(path2, client = false) {
 var ssr = function(req) {
   console.log("Headers:", Object.fromEntries(req.headers));
   let request = req;
+  const forwardedProto = req.headers.get("x-forwarded-proto");
+  if (forwardedProto === "https") {
+    const originalUrl = new URL(req.url);
+    const secureUrl = new URL(req.url);
+    secureUrl.protocol = "https:";
+    req = new Request(secureUrl.toString(), req);
+  }
   if (build_options.dynamic_origin ?? false) {
     let url = req.url;
     let path2 = url.slice(url.split("/", 3).join("/").length);
