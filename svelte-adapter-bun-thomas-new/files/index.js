@@ -676,9 +676,9 @@ import {
     if (build_options.dynamic_origin ?? false) {
       let url = req.url;
       let path2 = url.slice(url.split("/", 3).join("/").length);
-      let origin = get_origin(req.headers);
+      let origin = origin || get_origin(req.headers);
       request = new Request(origin + path2, req);
-    }
+    } 
     if (address_header && !request.headers.has(address_header)) {
       throw new Error(`Address header was specified with ${ENV_PREFIX + "ADDRESS_HEADER"}=${address_header} but is absent from request`);
     }
@@ -708,7 +708,7 @@ import {
     });
   };
   var get_origin = function(headers) {
-    const protocol = protocol_header && headers.get(protocol_header) || "http";
+    const protocol = protocol_header && headers.get(protocol_header) || "https";
     const host = headers.get(host_header);
     console.log(`Retrieved protocol: ${protocol}, host: ${host}`);
     return `${protocol}://${host}`;
@@ -718,9 +718,10 @@ import {
   var server = new Server(manifest);
   await server.init({ env: (Bun || process).env });
   var xff_depth = parseInt(env("XFF_DEPTH", build_options.xff_depth ?? 1));
+  var origin = env("ORIGIN", "").toLowerCase();
   var address_header = env("ADDRESS_HEADER", "").toLowerCase();
-  var protocol_header = env("PROTOCOL_HEADER", "X-Forwarded-Proto").toLowerCase();
-  var host_header = env("HOST_HEADER", "X-Forwarded-Host").toLowerCase();
+  var protocol_header = env("PROTOCOL_HEADER", "").toLowerCase();
+  var host_header = env("HOST_HEADER", "").toLowerCase();
   function handler_default(assets) {
     let handlers = [
       assets && serve(path.join(__dirname2, "/client"), true),
