@@ -1,11 +1,11 @@
 import { drizzle } from 'drizzle-orm/postgres-js';
-import postgres from 'postgres';
 import { migrate } from 'drizzle-orm/postgres-js/migrator';
-import 'dotenv/config';
+import postgres from 'postgres';
 
 async function main() {
-	const migrationClient = postgres(process.env.PRIVATE_DATABASE_URL ?? '', { max: 1 });
-	await migrate(drizzle(migrationClient), { migrationsFolder: 'drizzle' });
+	const sql = postgres(process.env.PRIVATE_DATABASE_URL ?? '', { max: 1 });
+	const db = drizzle(sql);
+	await migrate(db, { migrationsFolder: './drizzle' });
 }
 
 main()

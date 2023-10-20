@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "c3a2634a-7f2d-4a25-943c-66a5e6bf84c6",
-  "prevId": "aab8ce0f-e35e-4185-b1a4-efddb36d399d",
+  "id": "67b4d0af-2300-4107-ac4c-20e8249e3ed0",
+  "prevId": "28b58f36-0c7f-405f-a8dc-5a038c63844c",
   "tables": {
     "account": {
       "name": "account",
@@ -152,7 +152,8 @@
           "name": "id",
           "type": "uuid",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "default": "gen_random_uuid()"
         },
         "title": {
           "name": "title",
@@ -224,6 +225,18 @@
         },
         "name": {
           "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "firstName": {
+          "name": "firstName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "lastName": {
+          "name": "lastName",
           "type": "text",
           "primaryKey": false,
           "notNull": false

@@ -38,7 +38,6 @@ export const handle = sequence(
 		},
 		adapter: DrizzleAdapter(db),
 		providers: [
-			//@ts-expect-error issue ??
 			EmailProvider({
 				server: PRIVATE_EMAIL_SERVER,
 				from: PRIVATE_EMAIL_FROM
